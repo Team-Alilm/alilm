@@ -14,4 +14,12 @@ class AlilmMapper {
             productId = alilm.productId,
         )
     }
+
+    fun mapToDomainEntity(alilmJpaEntity: AlilmJpaEntity): Alilm {
+        return Alilm(
+            id = Alilm.AlilmId(alilmJpaEntity.id),
+            memberId = alilmJpaEntity.memberId,
+            productId = alilmJpaEntity.productId
+        )
+    }
 }
