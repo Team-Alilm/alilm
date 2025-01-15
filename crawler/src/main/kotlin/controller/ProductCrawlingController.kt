@@ -30,7 +30,6 @@ class ProductCrawlingController(
 
         val productCrawlingUseCase = productCrawlingUseCaseResolver.resolve(store)
         val result = productCrawlingUseCase.crawling(command)
-
         val response = ProductCrawlingResponse.from(result)
 
         return ResponseEntity.ok(response)
@@ -44,6 +43,7 @@ class ProductCrawlingController(
             return when {
                 url.contains("29cm") -> Store.CM29
                 url.contains("musinsa") -> Store.MUSINSA
+                url.contains("zigzag") -> Store.ZIGZAG
 //                url.contains("a-bly") -> Store.A_BLY
                 else -> throw IllegalArgumentException("지원하지 않는 URL입니다.")
             }

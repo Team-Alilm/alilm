@@ -1,5 +1,7 @@
 package org.team_alilm.gateway
 
+import org.jsoup.nodes.Document
+
 interface CrawlingGateway {
 
     fun htmlCrawling(request: CrawlingGatewayRequest) : CrawlingGatewayResponse
@@ -9,7 +11,7 @@ interface CrawlingGateway {
     )
 
     data class CrawlingGatewayResponse(
-        val html: String,
+        val document: Document,
     )
 }
 

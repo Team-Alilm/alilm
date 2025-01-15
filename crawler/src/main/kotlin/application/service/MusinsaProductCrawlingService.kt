@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
 import org.team_alilm.application.port.use_case.ProductCrawlingUseCase
+import org.team_alilm.error.NotParsingHtml
 import org.team_alilm.gateway.CrawlingGateway
 import org.team_alilm.gateway.CrawlingGateway.CrawlingGatewayRequest
 import util.StringContextHolder
@@ -21,10 +22,8 @@ class MusinsaProductCrawlingService(
 
     override fun crawling(command: ProductCrawlingUseCase.ProductCrawlingCommand): ProductCrawlingUseCase.CrawlingResult {
         val crawlingGatewayResponse = crawlingGateway.htmlCrawling(request = CrawlingGatewayRequest(url = command.url))
-        val productHtmlResponse = extractJsonData(crawlingGatewayResponse.html)
-            ?: throw RuntimeException("Failed to extract JSON data from script content")
-
-        log.info("jsonData: $productHtmlResponse")
+        val productHtmlResponse = extractJsonData(crawlingGatewayResponse.document.html())
+            ?: throw NotParsingHtml()
 
         val optionUri = getOptionUri(productHtmlResponse.get("goodsNo").asLong())
         val optionResponse = restClient.get()

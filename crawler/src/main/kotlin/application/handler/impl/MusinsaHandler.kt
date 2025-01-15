@@ -40,7 +40,7 @@ class MusinsaHandler(
 
     private fun crawlProductHtml(url: String): String {
         val request = CrawlingGateway.CrawlingGatewayRequest(url)
-        return crawlingGateway.htmlCrawling(request).html
+        return crawlingGateway.htmlCrawling(request).document.html()
     }
 
     private fun extractJsonFromHtml(html: String): String? {

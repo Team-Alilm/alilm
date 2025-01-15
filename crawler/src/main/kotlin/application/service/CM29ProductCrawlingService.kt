@@ -63,7 +63,7 @@ class CM29ProductCrawlingService(
             request = CrawlingGateway.CrawlingGatewayRequest(
                 url = url,
             )
-        ).html
+        ).document.html()
 
         val regexMeta = """<meta property="al:web:url" content="(https://product\.29cm\.co\.kr/catalog/\d+)">""".toRegex()
         val matchResult = regexMeta.find(html)

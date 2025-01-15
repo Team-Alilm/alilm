@@ -11,7 +11,6 @@ class HtmlCrawlingGateway : CrawlingGateway {
         val html = Jsoup
             .connect(request.url)
             .get()
-            .html()
 
         return CrawlingGateway.CrawlingGatewayResponse(html)
     }
